@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Paste Image Example</title>
+	</head>
+	<body>
+
+		<script src="../dist/paste-image.js"></script>
+
+    <script>
+
+      // The current image
+      var img = null;
+
+      pasteImage.on('pasting-image', function () {
+        console.log('pasting image...');
+      });
+
+      pasteImage.on('paste-image', function (image) {
+
+        // Does an image already exist? If so, remove it so that we can make space for our new image
+        if (img) {
+          document.body.removeChild(img);
+        }
+
+        // Save a reference to the image so that we have the option to remove it later
+        img = image;
+
+        // Display the new image
+        document.body.appendChild(image);
+
+        console.log('image pasted');
+      });
+
+    </script>
+
+		<h1>
+			Copy an image and then press Command+V (Mac) or Ctrl+V (Windows) anywhere in this window.
+		</h1>
+
+	</body>
+</html>
