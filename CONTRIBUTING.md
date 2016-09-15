@@ -103,5 +103,5 @@ Run tests in a browser
 Run Saucelabs Tests In a Specific Browser
 ---
 
-	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=TODO
-	  SAUCE_ACCESS_KEY=TODO npm run browser-test
+	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=paste-image
+	  SAUCE_ACCESS_KEY=26444f91-b3e8-455a-a4fe-e426105f756e npm run browser-test
