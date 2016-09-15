@@ -1,0 +1,26 @@
+{
+  "name": "paste-image",
+  "version": "0.0.1",
+  "description": "Cross-browser pasting of images",
+  "main": "dist/paste-image.min.js",
+  "homepage": "https://github.com/redgeoff/paste-image",
+  "authors": [
+    "Geoffrey Cox"
+  ],
+  "keywords": [
+    "paste",
+    "image",
+    "browser"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "npm-debug.log"
+  ],
+  "devDependencies": {},
+  "appPath": "app",
+  "dependencies": {}
+}
