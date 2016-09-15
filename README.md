@@ -8,9 +8,11 @@ Cross-browser pasting of images
 Example
 ===
 
+```js
 pasteImage.on('paste-image', function (image) {
   document.body.appendChild(image);
 });
+```
 
 
 Install via NPM
