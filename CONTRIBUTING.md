@@ -20,7 +20,7 @@ Committing Changes
 
 Updating Dependencies
 ---
-This requires having david installed globally, which is already handled by our vagrant setup.
+This requires having david installed globally.
 
 	david update
 
@@ -62,6 +62,37 @@ Debugging Tests Using Node Inspector
 	$ mocha -g regex test/index.js --debug-brk
 
 
+Running Browser Tests With Coverage
+---
+
+		$ npm run browser-coverage-full-test
+
+You can filter full browser tests using the GREP env variable, e.g.
+
+		$ GREP='e2e basic' npm run browser-coverage-full-test
+
+
+Running Tests in PhantomJS
+---
+
+    $ npm run browser-test-phantomjs
+
+
+You can filter the PhantomJS tests using the GREP env variable, e.g.
+
+    $ GREP='e2e basic' npm run browser-test-phantomjs
+
+
+Running Tests in Chrome and Firefox Automatically
+---
+
+Currently, this cannot be done in the VM as this project has not been configured to run Chrome and Firefox via Selenium headlessly. You can however use
+
+    $ npm run test-firefox
+    $ npm run test-chrome
+
+to test outside the VM, assuming you have Firefox and Chrome installed.
+
 Run tests in a browser
 ---
 
@@ -72,5 +103,5 @@ Run tests in a browser
 Run Saucelabs Tests In a Specific Browser
 ---
 
-	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=deltadb-common-utils
-	  SAUCE_ACCESS_KEY=5aa00b81-3d7f-4e7a-ba63-424c5360316d npm run browser-test
+	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=TODO
+	  SAUCE_ACCESS_KEY=TODO npm run browser-test
