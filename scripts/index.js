@@ -34,11 +34,19 @@ PasteImage.prototype._clipboardSupported = function () {
   return window.Clipboard;
 };
 
+PasteImage.prototype._pasteCatcherFocus = function () {
+  this._pasteCatcher.focus();
+};
+
 PasteImage.prototype._listenForClick = function () {
   var self = this;
-  // Make sure it is always in focus
+
+  // Make sure it is always in focus. We ignore code coverage for this area as there does not appear
+  // to be an easy cross-browser way of triggering a click event on the document
+  //
+  /* istanbul ignore next */
   document.addEventListener('click', function () {
-    self._pasteCatcher.focus();
+    self._pasteCatcherFocus();
   });
 };
 
@@ -98,10 +106,11 @@ PasteImage.prototype._pasteHandler = function (e) {
     // Loop through all items, looking for any kind of image
     for (var i = 0; i < items.length; i++) {
       if (items[i].type.indexOf('image') !== -1) {
-        // We need to represent the image as a file,
+        // We need to represent the image as a file
         var blob = items[i].getAsFile();
-        // and use a URL or webkitURL (whichever is available to the browser) to create a
-        // temporary URL to the object
+
+        // Use a URL or webkitURL (whichever is available to the browser) to create a temporary URL
+        // to the object
         var URLObj = this._getURLObj();
         var source = URLObj.createObjectURL(blob);
 

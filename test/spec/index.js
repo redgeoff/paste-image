@@ -226,10 +226,27 @@ describe('paste-image', function () {
     setTimeout(done, 10);
   });
 
-  it('should listen for click', function () {
+  it('should paste catcher focus', function () {
     // Just to trigger init
     pasteImage.on('paste-image', function () {});
 
+    pasteImage._pasteCatcherFocus();
+  });
+
+  it('should also use wekitURL', function () {
+    // Save for later
+    var windowURL = window.URL;
+
+    // Define webkitURL
+    window.webkitURL = window.URL;
+
+    // Remove window.URL
+    window.URL = null;
+
+    pasteImage._getURLObj().should.eql(window.webkitURL);
+
+    // Restore
+    window.URL = windowURL;
   });
 
 });
