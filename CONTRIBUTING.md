@@ -18,22 +18,27 @@ Committing Changes
 	git push
 
 
+Building
+---
+
+	npm run build
+
+
+Publishing to npm/bower
+---
+
+First, make sure that you have previously issued `npm adduser`. Also make sure that you have tin installed, e.g. `npm install -g tin`. Then:
+
+	tin -v VERSION
+	git diff # check that only version changed
+	npm run build-and-publish
+
+
 Updating Dependencies
 ---
 This requires having david installed globally.
 
 	david update
-
-
-Publishing to npm
----
-
-	tin -v VERSION
-	git add -A
-	git commit -m 'VERSION'
-	git tag vVERSION
-	git push origin master --tags
-	npm publish
 
 
 Run all local tests
@@ -105,3 +110,13 @@ Run Saucelabs Tests In a Specific Browser
 
 	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=paste-image
 	  SAUCE_ACCESS_KEY=26444f91-b3e8-455a-a4fe-e426105f756e npm run browser-test
+
+
+Updating gh-pages
+---
+
+	git checkout gh-pages
+	git merge master
+	git push origin gh-pages
+	git checkout master
+>>>>>>> 29e7768b09d8caa8cfe395f9fed7b702a8af49b1

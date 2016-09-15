@@ -1,7 +1,7 @@
 {
   "name": "paste-image",
   "version": "0.0.1",
-  "description": "paste-image",
+  "description": "Cross-browser pasting of images",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "browser-coverage-full-test": "npm run jshint && npm run browser-coverage-build && npm run browser-coverage-test && npm run browser-coverage-report && npm run browser-coverage-check",
     "test": "npm run assert-beautified && npm run browser-coverage-full-test",
     "min": "uglifyjs dist/paste-image.js -mc > dist/paste-image.min.js",
-    "build": "mkdir -p dist && browserify index.js -s pasteImage -o dist/paste-image.js && npm run min"
+    "build": "mkdir -p dist && browserify index.js -s pasteImage -o dist/paste-image.js && npm run min",
+    "build-and-publish": "./bin/publish.sh"
   },
   "dependencies": {
     "events": "^1.1.1",
