@@ -15,12 +15,13 @@ describe('paste-image', function () {
   // this.timeout(4000);
 
   before(function () {
+    // Clear any previously set listeners
     pasteImage.removeAllListeners();
   });
 
   var imgURL = '../browser/google.png';
 
-  // A low performance polyfill based on toDataURL
+  // A low performance polyfill based on toDataURL as Safari and IE don't yet support canvas.toBlob
   if (!HTMLCanvasElement.prototype.toBlob) {
    Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
     value: function (callback, type, quality) {
@@ -62,6 +63,19 @@ describe('paste-image', function () {
     });
   };
 
+  var imageURLToImage = function (url) {
+    return new Promise(function (resolve) {
+      var canvas = document.createElement('canvas'),
+        context = canvas.getContext('2d'),
+        img = new Image();
+
+      img.onload = function () {
+        resolve(img);
+      };
+      img.src = url;
+    });
+  };
+
   // To ensure that the image is being pasted properly, we'll compare dataURLs, i.e. we are
   // comparing the actual image data.
   var imageURLToDataURL = function (url) {
@@ -93,6 +107,7 @@ describe('paste-image', function () {
     });
   };
 
+  // As implemented by Chrome now and hopefully Firefox, Safari and IE in the future
   it('should paste image via clipboardData', function () {
     var imagePasted = once(pasteImage, 'paste-image'),
       blob = null;
@@ -120,8 +135,27 @@ describe('paste-image', function () {
     });
   });
 
+  // As implemented by Firefox, Safari and IE
   it('should paste image via pasteCatcher', function () {
+    var imagePasted = once(pasteImage, 'paste-image');
 
+    return imageURLToImage(imgURL).then(function (img) {
+
+      // Fake paste to pasteCatcher
+      pasteImage._pasteCatcher.appendChild(img);
+
+      // Fake unsupported clipboardData
+      pasteImage._pasteHandler({
+        clipboardData: {
+          items: undefined
+        }
+      });
+
+    }).then(function () {
+      return imagePasted;
+    }).then(function (args) {
+      return imagesShouldEql(imgURL, args[0]);
+    });
   });
 
 });
