@@ -9,8 +9,12 @@ Example
 ===
 
 ```js
+// Listen for all image paste events on a page
 pasteImage.on('paste-image', function (image) {
+  
+  // Display the image by appending it to the end of the body
   document.body.appendChild(image);
+
 });
 ```
 
