@@ -6,6 +6,7 @@
   </head>
   <body>
     <div id="mocha"></div>
+
     <script src="../../node_modules/mocha/mocha.js"></script>
     <script src="../../node_modules/chai/chai.js"></script>
     <script>
@@ -22,5 +23,10 @@
         mocha.run();
       }
     </script>
+
+    <!-- Polyfill Blob for PhantomJS. MochaPhantomJS requires this polyfill to be included after
+    mochaPhantomJS.run() -->
+    <script src="../../node_modules/blob-polyfill/Blob.js"></script>
+
   </body>
 </html>

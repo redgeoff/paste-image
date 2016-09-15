@@ -14,12 +14,26 @@ describe('paste-image', function () {
   // // The default of 2s is too low for IE 9
   // this.timeout(4000);
 
+  var clipboardSupported = null,
+    imgURL = '../browser/google.png';
+
   before(function () {
     // Clear any previously set listeners
     pasteImage.removeAllListeners();
+
+    // Save so that we can fake
+    clipboardSupported = pasteImage._clipboardSupported;
+
+    // Fake
+    pasteImage._clipboardSupported = function () {
+      return false;
+    };
   });
 
-  var imgURL = '../browser/google.png';
+  after(function () {
+    // Restore after any faking
+    pasteImage._clipboardSupported = clipboardSupported;
+  });
 
   // A low performance polyfill based on toDataURL as Safari and IE don't yet support canvas.toBlob
   if (!HTMLCanvasElement.prototype.toBlob) {
@@ -124,6 +138,8 @@ describe('paste-image', function () {
             getAsFile: function () {
               return blob;
             }
+          }, {
+            type: 'not-img'
           }]
         }
       });
@@ -137,6 +153,7 @@ describe('paste-image', function () {
 
   // As implemented by Firefox, Safari and IE
   it('should paste image via pasteCatcher', function () {
+
     var imagePasted = once(pasteImage, 'paste-image');
 
     return imageURLToImage(imgURL).then(function (img) {
@@ -156,6 +173,63 @@ describe('paste-image', function () {
     }).then(function (args) {
       return imagesShouldEql(imgURL, args[0]);
     });
+  });
+
+  it('should check if clipboard supported', function () {
+    // Mostly for test coverage
+    pasteImage._clipboardSupported = clipboardSupported;
+    pasteImage._clipboardSupported().should.eql(window.Clipboard);
+  });
+
+  it('should not create paste catcher if clipboard supported', function () {
+    pasteImage._clipboardSupported = function () {
+      return true;
+    };
+    pasteImage._createPasteCatcherIfNeeded();
+  });
+
+  it('should handle missing pasteCatcher children', function (done) {
+
+    // Just to trigger init
+    pasteImage.on('paste-image', function () {});
+
+    // Fake unsupported clipboardData
+    pasteImage._pasteHandler({
+      clipboardData: {
+        items: undefined
+      }
+    });
+
+    // We have to wait a bit for the _checkInput to run
+    setTimeout(done, 10);
+
+  });
+
+  it('should handle non image pasteCatcher children', function (done) {
+
+    // Just to trigger init
+    pasteImage.on('paste-image', function () {});
+
+    var div = document.createElement('div');
+
+    // Fake paste to pasteCatcher
+    pasteImage._pasteCatcher.appendChild(div);
+
+    // Fake unsupported clipboardData
+    pasteImage._pasteHandler({
+      clipboardData: {
+        items: undefined
+      }
+    });
+
+    // We have to wait a bit for the _checkInput to run
+    setTimeout(done, 10);
+  });
+
+  it('should listen for click', function () {
+    // Just to trigger init
+    pasteImage.on('paste-image', function () {});
+
   });
 
 });
