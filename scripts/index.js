@@ -102,7 +102,7 @@ PasteImage.prototype._pasteHandler = function (e) {
     setTimeout(function () {
       self._checkInput();
     }, 1);
-}
+  }
 };
 
 // Parse the input in the paste catcher element
