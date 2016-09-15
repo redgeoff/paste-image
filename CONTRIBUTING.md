@@ -105,3 +105,13 @@ Run Saucelabs Tests In a Specific Browser
 
 	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=TODO
 	  SAUCE_ACCESS_KEY=TODO npm run browser-test
+
+
+		
+Updating gh-pages
+---
+
+	git checkout gh-pages
+	git merge master
+	git push origin gh-pages
+	git checkout master
