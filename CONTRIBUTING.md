@@ -119,4 +119,3 @@ Updating gh-pages
 	git merge master
 	git push origin gh-pages
 	git checkout master
->>>>>>> 29e7768b09d8caa8cfe395f9fed7b702a8af49b1
