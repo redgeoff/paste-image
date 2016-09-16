@@ -108,9 +108,8 @@ Run tests in a browser
 Run Saucelabs Tests In a Specific Browser
 ---
 
-	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=TODO
-	  SAUCE_ACCESS_KEY=TODO npm run browser-test
-
+	$ CLIENT="saucelabs:internet explorer:9" SAUCE_USERNAME=paste-image-user
+	  SAUCE_ACCESS_KEY=323f6977-df33-4713-8967-511394cb07e5 npm run browser-test
 
 
 Updating gh-pages

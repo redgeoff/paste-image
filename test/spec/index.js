@@ -178,7 +178,7 @@ describe('paste-image', function () {
   it('should check if clipboard supported', function () {
     // Mostly for test coverage
     pasteImage._clipboardSupported = clipboardSupported;
-    pasteImage._clipboardSupported().should.eql(window.Clipboard);
+    (pasteImage._clipboardSupported() === window.Clipboard).should.eql(true);
   });
 
   it('should not create paste catcher if clipboard supported', function () {

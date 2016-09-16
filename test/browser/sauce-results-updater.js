@@ -9,6 +9,7 @@ var request = require('request'),
 
 var Sauce = function (username, accessKey) {
   this._username = username;
+  this._password = accessKey;
   this._sauceLabs = new SauceLabs({
     username: username,
     password: accessKey
@@ -23,8 +24,14 @@ Sauce.prototype.findJob = function (jobName) {
   // request manually.
   var self = this;
   return new Promise(function (resolve, reject) {
-    var url = 'https://saucelabs.com/rest/v1/' + self._username + '/jobs?full=true';
-    request(url, function (err, res, body) {
+    var opts = {
+      url: 'https://saucelabs.com/rest/v1/' + self._username + '/jobs?full=true',
+      auth: {
+        user: self._username,
+        password: self._password
+      }
+    };
+    request(opts, function (err, res, body) {
       if (err) {
         reject(err);
       } else {
