@@ -29,6 +29,8 @@ Publishing to npm/bower
 
 First, make sure that you have previously issued `npm adduser`. Also make sure that you have tin installed, e.g. `npm install -g tin`. Then:
 
+	git checkout master
+	git pull origin master
 	tin -v VERSION
 	git diff # check that only version changed
 	npm run build-and-publish
