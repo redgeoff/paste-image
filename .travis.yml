@@ -32,8 +32,8 @@ env:
   # https://github.com/travis-ci/travis-ci/issues/1946 and
   # https://github.com/angular/angular.js/issues/5596 for more information.
   global:
-    - SAUCE_USERNAME=paste-image
-    - SAUCE_ACCESS_KEY=26444f91-b3e8-455a-a4fe-e426105f756e
+    - SAUCE_USERNAME=paste-image-user
+    - SAUCE_ACCESS_KEY=323f6977-df33-4713-8967-511394cb07e5
 
 branches:
   only:

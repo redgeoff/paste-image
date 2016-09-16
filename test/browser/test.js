@@ -6,6 +6,7 @@ var wd = require('wd');
 var sauceConnectLauncher = require('sauce-connect-launcher');
 var selenium = require('selenium-standalone');
 var querystring = require('querystring');
+var SauceResultsUpdater = require('./sauce-results-updater');
 
 var server = require('./server.js');
 
@@ -17,6 +18,8 @@ var MS_BEFORE_RETRY = 60000;
 
 var username = process.env.SAUCE_USERNAME;
 var accessKey = process.env.SAUCE_ACCESS_KEY;
+
+var sauceResultsUpdater = new SauceResultsUpdater(username, accessKey);
 
 // process.env.CLIENT is a colon seperated list of
 // (saucelabs|selenium):browserName:browserVerion:platform
@@ -38,6 +41,8 @@ var tunnelId = process.env.TRAVIS_JOB_NUMBER || 'tunnel-' + Date.now();
 
 var jobName = tunnelId + '-' + clientStr;
 
+var build = (process.env.TRAVIS_COMMIT ? process.env.TRAVIS_COMMIT : Date.now());
+
 if (client.runner === 'saucelabs') {
   qs.saucelabs = true;
 }
@@ -56,7 +61,13 @@ function testError(e) {
 
 function postResult(result) {
   var failed = !process.env.PERF && result.failed;
-  process.exit(failed ? 1 : 0);
+  if (client.runner === 'saucelabs') {
+    sauceResultsUpdater.setPassed(jobName, build, !failed).then(function () {
+      process.exit(failed ? 1 : 0);
+    });
+  } else {
+    process.exit(failed ? 1 : 0);
+  }
 }
 
 function testComplete(result) {
