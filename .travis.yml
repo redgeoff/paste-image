@@ -1,5 +1,9 @@
 language: node_js
 
+before_script:
+  # Prevent issues with bitbucket rate limiting
+  - PHANTOMJS_CDNURL=http://cnpmjs.org/downloads npm install -g phantomjs
+
 script: npm run $COMMAND
 
 after_script: cat ./coverage/node/lcov.info ./coverage/browser/lcov.info | ./node_modules/coveralls/bin/coveralls.js
