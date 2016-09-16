@@ -61,6 +61,11 @@ PasteImage.prototype._createPasteCatcherIfNeeded = function () {
 
     // We can hide the element and append it to the body,
     this._pasteCatcher.style.opacity = 0;
+
+    // Use absolute positioning so that the paste catcher doesn't take up extra space. Note: we
+    // cannot set style.display='none' as this will disable the functionality.
+    this._pasteCatcher.style.position = 'absolute';
+
     document.body.appendChild(this._pasteCatcher);
 
     this._pasteCatcher.focus();
