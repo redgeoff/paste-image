@@ -6,7 +6,7 @@ Cross-browser pasting of images
 
 
 Example
-===
+---
 
 ```js
 // Listen for all image paste events on a page
@@ -20,13 +20,13 @@ pasteImage.on('paste-image', function (image) {
 
 
 Install via NPM
-===
+---
 
     npm install paste-image
 
 
 Why?
-===
+---
 
 It's 2016 and Chrome is the only browser to properly implement the [Clipboard API](https://www.w3.org/TR/clipboard-apis). Let's wrap up some workarounds and provide an easy way to provide cross-browser image pasting.
 
