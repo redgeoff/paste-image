@@ -2,7 +2,7 @@ language: node_js
 
 before_script:
   # Prevent issues with bitbucket rate limiting
-  - PHANTOMJS_CDNURL=http://cnpmjs.org/downloads npm install -g phantomjs
+  - export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 
 script: npm run $COMMAND
 
