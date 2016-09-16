@@ -1,9 +1,5 @@
 language: node_js
 
-before_script:
-  # Prevent issues with bitbucket rate limiting
-  - export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
-
 script: npm run $COMMAND
 
 after_script: cat ./coverage/node/lcov.info ./coverage/browser/lcov.info | ./node_modules/coveralls/bin/coveralls.js
@@ -38,6 +34,8 @@ env:
   global:
     - SAUCE_USERNAME=paste-image-user
     - SAUCE_ACCESS_KEY=323f6977-df33-4713-8967-511394cb07e5
+    # Prevent issues with bitbucket rate limiting
+    - PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 
 branches:
   only:
