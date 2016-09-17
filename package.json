@@ -1,6 +1,6 @@
 {
   "name": "paste-image",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Cross-browser pasting of images",
   "main": "index.js",
   "repository": {
