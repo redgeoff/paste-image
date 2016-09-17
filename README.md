@@ -5,6 +5,11 @@ paste-image [![Build Status](https://travis-ci.org/redgeoff/paste-image.svg)](ht
 Cross-browser pasting of images
 
 
+[Live Demo](http://redgeoff.github.io/paste-image/examples)
+---
+A [simple example](http://redgeoff.github.io/paste-image/examples) that works in all major browsers.
+
+
 Example
 ---
 
