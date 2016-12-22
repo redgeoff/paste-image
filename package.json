@@ -44,7 +44,7 @@
   "devDependencies": {
     "beautify-proj": "0.0.4",
     "blob-polyfill": "^1.0.20150320",
-    "bluebird": "^3.4.6",
+    "bluebird": "^3.4.7",
     "browserify": "^13.1.0",
     "browserify-istanbul": "^2.0.0",
     "chai": "^3.5.0",
