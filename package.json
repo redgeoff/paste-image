@@ -45,7 +45,7 @@
     "beautify-proj": "0.0.4",
     "blob-polyfill": "^1.0.20150320",
     "bluebird": "^3.4.6",
-    "browserify": "^13.1.0",
+    "browserify": "^14.2.0",
     "browserify-istanbul": "^2.0.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
