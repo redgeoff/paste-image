@@ -1,5 +1,7 @@
 paste-image [![Build Status](https://travis-ci.org/redgeoff/paste-image.svg)](https://travis-ci.org/redgeoff/paste-image) [![Coverage Status](https://coveralls.io/repos/redgeoff/paste-image/badge.svg?branch=master&service=github)](https://coveralls.io/github/redgeoff/paste-image?branch=master) [![Dependency Status](https://david-dm.org/redgeoff/paste-image.svg)](https://david-dm.org/redgeoff/paste-image)
 ===
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/redgeoff/paste-image.svg)](https://greenkeeper.io/)
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/paste-image-user.svg)](https://saucelabs.com/u/paste-image-user)
 
 Cross-browser pasting of images
