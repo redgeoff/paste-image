@@ -91,11 +91,11 @@ PasteImage.prototype._init = function () {
   this._initialized = true;
 };
 
-PasteImage.prototype._checkInputOnNextTick = function () {
+PasteImage.prototype._checkInputOnNextTick = function (e) {
   var self = this;
   // This is a cheap trick to make sure we read the data AFTER it has been inserted.
   setTimeout(function () {
-    self._checkInput();
+    self._checkInput(e);
   }, 1);
 };
 
@@ -120,13 +120,13 @@ PasteImage.prototype._pasteHandler = function (e) {
         var source = URLObj.createObjectURL(blob);
 
         // The URL can then be used as the source of an image
-        this._createImage(source);
+        this._createImage(source, e);
       }
     }
     // If we can't handle clipboard data directly (Firefox), we need to read what was pasted from
     // the contenteditable element
   } else {
-    this._checkInputOnNextTick();
+    this._checkInputOnNextTick(e);
   }
 };
 
@@ -135,7 +135,7 @@ PasteImage.prototype._getURLObj = function () {
 };
 
 // Parse the input in the paste catcher element
-PasteImage.prototype._checkInput = function () {
+PasteImage.prototype._checkInput = function (e) {
   // Store the pasted content in a variable
   var child = this._pasteCatcher.childNodes[0];
 
@@ -146,19 +146,19 @@ PasteImage.prototype._checkInput = function () {
     // If the user pastes an image, the src attribute will represent the image as a base64 encoded
     // string.
     if (child.tagName === 'IMG') {
-      this._createImage(child.src);
+      this._createImage(child.src, e);
     }
   }
 };
 
 // Creates a new image from a given source
-PasteImage.prototype._createImage = function (source) {
+PasteImage.prototype._createImage = function (source, e) {
   var self = this,
     pastedImage = new Image();
 
   pastedImage.onload = function () {
     // You now have the image!
-    self.emit('paste-image', pastedImage);
+    self.emit('paste-image', pastedImage, e);
   };
   pastedImage.src = source;
 };
